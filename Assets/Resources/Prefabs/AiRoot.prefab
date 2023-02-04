@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4965301157926601946}
   - component: {fileID: 4965301157926601947}
   - component: {fileID: 837750421840951938}
+  - component: {fileID: -327848179131039286}
+  - component: {fileID: -8504411590798095050}
   m_Layer: 0
   m_Name: AiRoot
   m_TagString: Untagged
@@ -155,3 +157,32 @@ MonoBehaviour:
   movement: {fileID: 4965301157926601945}
   policyTimeMin: 3
   policyTimeMax: 10
+  moveMinimulDis: 0.1
+--- !u!114 &-327848179131039286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4965301157926601948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72bc191a6b104b55ab4455fb48e130f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxHp: 5
+  m_Atk: 1
+  m_CoolingTime: 3
+--- !u!114 &-8504411590798095050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4965301157926601948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 006f4037b0d279249809d23ce9ba6ecc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxHp: 14

@@ -14,7 +14,7 @@ namespace Model.Component
         protected override void AttackEntity(IEntity entity)
         {
             var bullet = BulletPool.Pop();
-            bullet.Init(transform.position, entity.GameObject.transform.position, Atk);
+            bullet.Init(Root, transform.position, entity.GameObject.transform.position, Atk);
         }
     }
 }
