@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Model
@@ -21,11 +22,19 @@ namespace Model
             m_Damage = damage;
         }
 
+        private void OnEnable()
+        {
+            m_Countdown = 0;
+        }
+
         void Update()
         {
             m_Countdown += Time.deltaTime;
             if (m_Countdown >= m_LifeTime)
+            {
+                m_Countdown = 0;
                 BulletPool.Push(this);
+            }
             else
                 transform.Translate(m_Direction * (m_Speed * Time.deltaTime));
         }
@@ -38,7 +47,6 @@ namespace Model
                 && ((entity is IComponent component && component.Root != null && component.Root != m_Shotter) 
                     || (entity is Root && entity != m_Shotter)))
             {
-                Debug.Log("Attack");
                 entity.Hurt(m_Damage);
                 BulletPool.Push(this);
             }

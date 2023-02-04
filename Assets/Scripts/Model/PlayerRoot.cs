@@ -14,8 +14,7 @@ namespace Model
         void OnDestroy()
         {
             Roots.Instance.playerRoot = null;
+            EventScheduler<GameEvent>.Global[GameEvent.GameOver].Broadcast();
         }
-        void TestPlayer()
-        {}
     }
 }

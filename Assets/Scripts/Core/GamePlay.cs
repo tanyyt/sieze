@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Utils;
 
 namespace Core
 {
@@ -15,6 +16,7 @@ namespace Core
 
         private ComponentsGenerator m_ComponentsGenerators;
         private EnemyRootsGenerator m_EnemyRootGenerator;
+        private bool m_IsGameOver;
 
         void Awake()
         {
@@ -25,10 +27,19 @@ namespace Core
             };
             m_ComponentsGenerators = new ComponentsGenerator(map);
             m_EnemyRootGenerator = new EnemyRootsGenerator(map);
+            EventScheduler<GameEvent>.Global.RegisterOrSubscribe(GameEvent.GameOver, GameOver);
+        }
+
+        void GameOver()
+        {
+            m_IsGameOver = true;   
+            Debug.Log("Game Over");
         }
 
         void Update()
         {
+            if (m_IsGameOver) return;
+            
             m_ComponentsCountdown += Time.deltaTime;
             m_RootsCountdown += Time.deltaTime;
 
@@ -38,7 +49,7 @@ namespace Core
                 m_ComponentsCountdown = 0;
                 m_ComponentsGenerators.Generate();
             }
-            
+
             //Root Generate
             if (m_RootsCountdown > m_EnemyRootGenerateFrequency && Roots.Instance.Count < m_MaxEnemyRootCount)
             {

@@ -1,11 +1,18 @@
 ﻿using System.Collections.Generic;
+using Core;
 using UnityEngine;
+using Utils;
 
 namespace Model
 {
     public static class BulletPool
     {
         private static readonly Stack<Bullet> s_Pool = new Stack<Bullet>();
+
+        public static void ClearPool()
+        {
+            s_Pool.Clear();
+        }
 
         public static Bullet Pop()
         {
