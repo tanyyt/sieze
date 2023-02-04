@@ -4,11 +4,12 @@ namespace Core
 {
     public class Movement : MonoBehaviour
     {
-        public Map map;
         public float speed = 1f;
         public float angularSpeed = 20f;
         public float minimulAngle = 5f;
         private Rigidbody2D m_Rig;
+        private Vector2 m_Direction = Vector2.zero;
+        private Vector2 m_Forward = Vector2.up;
 
         void Awake()
         {
@@ -17,14 +18,20 @@ namespace Core
 
         void FixedUpdate()
         {
-            var horizontal = Input.GetAxisRaw("Horizontal");
-            var vertical = Input.GetAxisRaw("Vertical");
-            m_Rig.velocity = (Vector3.right * horizontal + Vector3.up * vertical).normalized * speed;
+            m_Rig.velocity = m_Direction * speed;
 
-            var targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var targetDir = (targetPos - transform.position).normalized;
-            float signedAngle = Vector2.SignedAngle(new Vector2(transform.up.x, transform.up.y), new Vector2(targetDir.x, targetDir.y));
+            float signedAngle = Vector2.SignedAngle(new Vector2(transform.up.x, transform.up.y), new Vector2(m_Forward.x, m_Forward.y));
             m_Rig.angularVelocity = Mathf.Abs(signedAngle) > minimulAngle ? Mathf.Sign(signedAngle) * angularSpeed : 0f;
+        }
+
+        public void SetDirection(Vector2 dir)
+        {
+            m_Direction = dir.normalized;
+        }
+
+        public void SetForward(Vector2 forward)
+        {
+            m_Forward = forward.normalized;
         }
     }
 }
