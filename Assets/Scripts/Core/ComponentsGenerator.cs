@@ -1,4 +1,4 @@
-﻿using Model.Component;
+﻿using Model;
 using UnityEngine;
 
 namespace Core
@@ -19,8 +19,8 @@ namespace Core
         {
             var index = Random.Range(0, m_ComponentNames.Length - 1);
             var componentName = m_ComponentNames[index];
-            Debug.Log(componentName);
-            Object.Instantiate(Resources.Load($"Prefabs/{componentName}"), pos, Quaternion.identity);
+            var gameObject = Object.Instantiate(Resources.Load<GameObject>($"Prefabs/{componentName}"), pos, Quaternion.identity);
+            DeactivateComponents.Instance.AddComponent(gameObject.GetComponent<IComponent>());
         }
     }
 }

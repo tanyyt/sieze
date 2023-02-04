@@ -19,6 +19,7 @@ namespace Model
         {
             Hp = MaxHp;
             Root = root;
+            DeactivateComponents.Instance.RemoveComponent(this);
         }
 
         protected virtual void Awake()
@@ -42,7 +43,7 @@ namespace Model
 
         public virtual void Deactivate()
         {
-            DeactivateComponents.Instance.RemoveComponent(this);
+            DeactivateComponents.Instance.AddComponent(this);
         }
 
     }

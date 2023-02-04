@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using Core;
-using UnityEngine;
+using Utils;
 
 namespace Model
 {
@@ -17,5 +15,7 @@ namespace Model
         {
             Roots.Instance.playerRoot = null;
         }
+        void TestPlayer()
+        {}
     }
 }
