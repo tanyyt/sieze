@@ -4,7 +4,7 @@ namespace Core
 {
     public class CameraController : MonoBehaviour
     {
-        public float smoothing;
+        public float smoothTime = 1f;
         public Transform target;
         public bool enableCameraClamp;
         public Vector2 left_down;
@@ -26,7 +26,9 @@ namespace Core
                     targetPos.x = Mathf.Clamp(targetPos.x, left_down.x, right_up.x);
                     targetPos.y = Mathf.Clamp(targetPos.y, left_down.y, right_up.y);
                 }
-                var followVec = Vector2.Lerp(curPos, targetPos, smoothing);
+
+                var curVel = Vector2.zero;
+                var followVec = Vector2.SmoothDamp(curPos, targetPos, ref curVel, smoothTime, Mathf.Infinity);
                 transform.position = new Vector3(followVec.x, followVec.y, transform.position.z);
             }
         }
