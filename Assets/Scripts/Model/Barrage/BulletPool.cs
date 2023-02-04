@@ -5,7 +5,7 @@ namespace Model
 {
     public static class BulletPool
     {
-        private static Stack<Bullet> s_Pool = new Stack<Bullet>();
+        private static readonly Stack<Bullet> s_Pool = new Stack<Bullet>();
 
         public static Bullet Pop()
         {
@@ -13,11 +13,12 @@ namespace Model
             {
                 return s_Pool.Pop();
             }
-            return Resources.Load<Bullet>("BulletPool");
+            return Object.Instantiate(Resources.Load<Bullet>("Prefabs/Bullet"));
         }
 
         public static void Push(Bullet bullet)
         {
+            bullet.gameObject.SetActive(false);
             s_Pool.Push(bullet);
         }
     }
