@@ -1,3 +1,5 @@
+using System.Xml.Linq;
+using Core;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -35,12 +37,12 @@ namespace Model
 
         protected virtual void Warning()
         {
-            
+                       
         }
 
         public virtual void Deactivate()
         {
-            
+            DeactivateComponents.Instance.RemoveComponent(this);
         }
 
     }

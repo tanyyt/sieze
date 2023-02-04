@@ -9,7 +9,10 @@ namespace Core
 
         void FixedUpdate()
         {
-            CameraFollow();
+            if (target != null)
+            {
+                CameraFollow();
+            }
         }
 
         void CameraFollow()

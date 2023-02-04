@@ -16,10 +16,15 @@ namespace Model
         public int MaxHp => m_MaxHp;
         public int Count => m_Components.Count;
 
-        //todo: delete this method
         protected virtual void Awake()
         {
-            Roots.Instance.AddRoots(this);
+            m_Hp = m_MaxHp;
+            Roots.Instance.AddRoot(this);
+        }
+
+        private void OnDestroy()
+        {
+            Roots.Instance.RemoveRoot(this);
         }
 
         public void Hurt(int damage)
@@ -28,6 +33,8 @@ namespace Model
             if (m_Hp <= 0)
             {
                 DeactivateComponents();
+                Roots.Instance.RemoveRoot(this);
+                Destroy(gameObject);
             }
         }
         
@@ -66,14 +73,8 @@ namespace Model
 
         bool IRoot.RemoveComponent(IComponent component) => m_Components.Remove(component);
 
-        public IEnumerator<IComponent> GetEnumerator()
-        {
-            return m_Components.GetEnumerator();
-        }
+        public IEnumerator<IComponent> GetEnumerator() => m_Components.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
