@@ -11,7 +11,7 @@ namespace Model
             Roots.Instance.playerRoot = this;
         }
 
-        protected override void OnDestroy()
+        void OnDestroy()
         {
             Roots.Instance.playerRoot = null;
             EventScheduler<GameEvent>.Global[GameEvent.GameOver].Broadcast();

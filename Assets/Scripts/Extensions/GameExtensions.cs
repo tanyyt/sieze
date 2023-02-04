@@ -4,6 +4,12 @@ using UnityEngine;
 
 public static class GameExtensions
 {
+    public static void LookAt2D(this Transform transform, Transform target)
+    {
+        Vector2 direction = target.position - transform.position;
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
     public static IComponent GetNearComponent(this Transform transform, IRoot root)
     {
         var minDis = float.MaxValue;

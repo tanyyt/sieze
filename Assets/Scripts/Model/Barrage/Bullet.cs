@@ -1,6 +1,4 @@
-﻿using System;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Model
 {
@@ -8,17 +6,18 @@ namespace Model
     {
         [SerializeField] private float m_Speed = 8;
         [SerializeField] private float m_LifeTime = 4f;
-        private Vector2 m_Direction;
         private int m_Damage;
-        private IRoot m_Shotter;
+        private IRoot m_Shooter;
         private float m_Countdown;
 
         public void Init(IRoot shooter, Vector2 bornPos, Vector2 target, int damage)
         {
-            m_Shotter = shooter;
+            m_Shooter = shooter;
             transform.position = bornPos;
             var pos = transform.position;
-            m_Direction = (target - new Vector2(pos.x, pos.y)).normalized;
+            var direction = (target - new Vector2(pos.x, pos.y)).normalized;
+            var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             m_Damage = damage;
         }
 
@@ -36,16 +35,16 @@ namespace Model
                 BulletPool.Push(this);
             }
             else
-                transform.Translate(m_Direction * (m_Speed * Time.deltaTime));
+                transform.Translate(transform.right * (m_Speed * Time.deltaTime), Space.World);
         }
 
         public void OnTriggerEnter2D(Collider2D col)
         {
             var entity = col.GetComponent<IEntity>();
 
-            if (entity != null 
-                && ((entity is IComponent component && component.Root != null && component.Root != m_Shotter) 
-                    || (entity is Root && entity != m_Shotter)))
+            if (entity != null
+                && ((entity is IComponent component && component.Root != null && component.Root != m_Shooter)
+                    || (entity is Root && entity != m_Shooter)))
             {
                 entity.Hurt(m_Damage);
                 BulletPool.Push(this);

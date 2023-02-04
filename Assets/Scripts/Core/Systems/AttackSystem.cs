@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Model;
+using UnityEngine;
 
 namespace Core
 {
@@ -13,12 +14,19 @@ namespace Core
             foreach (var root in roots)
             {
                 root.RequireComponents(m_Attackers);
-                foreach(var attacker in m_Attackers)
+                foreach (var attacker in m_Attackers)
                 {
-                    if(attacker.IsCooling)
-                    {
+                    var target = root.FindNearestRoot(AttackDistance);
+                    if(target == null)
                         continue;
-                    }
+                    
+                    var targetTrans = target.GameObject.transform;
+                    var attackerTrans = attacker.GameObject.transform;
+                    attackerTrans.LookAt2D(targetTrans);
+
+                    if (attacker.IsCooling)
+                        continue;
+
                     attacker.Attack(root.FindNearestRoot(AttackDistance));
                 }
             }

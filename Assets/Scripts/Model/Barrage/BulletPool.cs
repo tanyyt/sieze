@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using Core;
 using UnityEngine;
-using Utils;
 
 namespace Model
 {
@@ -22,14 +20,15 @@ namespace Model
                 bullet.gameObject.SetActive(true);
                 return bullet;
             }
+
             return Object.Instantiate(Resources.Load<Bullet>("Prefabs/Bullet"));
         }
 
         public static void Push(Bullet bullet)
         {
+            bullet.transform.rotation = Quaternion.identity;
             bullet.gameObject.SetActive(false);
             s_Pool.Push(bullet);
         }
     }
-
 }
