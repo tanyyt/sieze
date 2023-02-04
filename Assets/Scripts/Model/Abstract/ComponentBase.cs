@@ -13,7 +13,7 @@ namespace Model
         
         public IRoot Root { get; private set; }
 
-        public void Initialize(IRoot root)
+        public void Activate(IRoot root)
         {
             Hp = MaxHp;
             Root = root;
@@ -21,26 +21,26 @@ namespace Model
 
         protected virtual void Awake()
         {
-            Initialize(null);
+            Activate(null);
         }
 
         public void Hurt(int damage)
         {
             Hp -= damage;
-            if (Hp < 0) 
-                Dead();
+            if (Hp <= 0) 
+                Deactivate();
             else if (Hp < MaxHp / 2)
                 Warning();
         }
 
-        public void Warning()
+        protected virtual void Warning()
         {
-            Debug.Log("Hp < 50%");
+            
         }
 
-        public void Dead()
+        public virtual void Deactivate()
         {
-            Debug.Log("Component Dead!");
+            
         }
 
     }
