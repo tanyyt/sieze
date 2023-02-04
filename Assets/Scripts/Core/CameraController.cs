@@ -10,7 +10,7 @@ namespace Core
         public Vector2 left_down;
         public Vector2 right_up;
 
-        void Update()
+        void FixedUpdate()
         {
             CameraFollow();
         }
@@ -28,7 +28,7 @@ namespace Core
                 }
 
                 var curVel = Vector2.zero;
-                var followVec = Vector2.SmoothDamp(curPos, targetPos, ref curVel, smoothTime, Mathf.Infinity);
+                var followVec = Vector2.SmoothDamp(curPos, targetPos, ref curVel, smoothTime, Mathf.Infinity, Time.fixedDeltaTime);
                 transform.position = new Vector3(followVec.x, followVec.y, transform.position.z);
             }
         }

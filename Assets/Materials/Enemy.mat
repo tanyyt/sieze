@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Default
+  m_Name: Enemy
   m_Shader: {fileID: 4800000, guid: 3dce225cafa7b4505a5c9a8b6f533821, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -43,6 +43,6 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _HdrTint: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
+    - _HdrTint: {r: 1.6506102, g: 0.3066506, b: 0.292158, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
