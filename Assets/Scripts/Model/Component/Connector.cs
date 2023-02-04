@@ -8,17 +8,29 @@ namespace Model
     {
         [SerializeField]
         private int m_MaxHp;
+        [SerializeField]
+        private float m_ConnectRange;
+        [SerializeField]
+        private CircleCollider2D m_CircleCollider;
 
         private readonly List<IComponent> m_Components = new();
 
         public override int MaxHp => m_MaxHp;
 
         int IConnector.Count => m_Components.Count;
+        float IConnector.ConnectRange => m_ConnectRange;
+
+        public override void Activate(IRoot root)
+        {
+            base.Activate(root);
+            m_CircleCollider.radius = Mathf.Sqrt(m_ConnectRange);
+        }
 
         public void Connect(IComponent component)
         {
             component.Activate(Root);
             ((IRoot)this).AddComponent(component);
+            component.GameObject.transform.SetParent(GameObject.transform);
         }
 
         public bool LostConnect(IComponent component) => ((IRoot)this).RemoveComponent(component);

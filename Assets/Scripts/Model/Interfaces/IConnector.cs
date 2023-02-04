@@ -4,6 +4,7 @@ namespace Model
 {
     public interface IConnector : IEnumerable<IComponent>
     {
+        float ConnectRange { get; }
         void Connect(IComponent component);
         bool LostConnect(IComponent component);
 

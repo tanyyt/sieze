@@ -2,7 +2,8 @@ namespace Model
 {
     public interface IComponent : IEntity
     {
-        public IRoot Root{get; }
+        IRoot Root{ get; }
+        bool IsInConnectorRange { get; }
         void Activate(IRoot root);
         void Deactivate();
     }

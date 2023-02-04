@@ -9,19 +9,26 @@ namespace Model
     public class Root : MonoBehaviour, IRoot
     {
         [SerializeField] private int m_MaxHp;
+        [SerializeField] private float m_ConnectRange;
+        [SerializeField] private CircleCollider2D m_CircleCollider;
         [ReadOnly] [ShowInInspector] private int m_Hp;
         private readonly List<IComponent> m_Components = new();
         public GameObject GameObject => gameObject;
         public int MaxHp => m_MaxHp;
         public int Count => m_Components.Count;
+        public float ConnectRange => m_ConnectRange;
 
         protected virtual void Awake()
         {
             m_Hp = m_MaxHp;
+            if(null != m_CircleCollider)
+            {
+                m_CircleCollider.radius = Mathf.Sqrt(m_ConnectRange);
+            }
             Roots.Instance.AddRoot(this);
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             Roots.Instance.RemoveRoot(this);
         }
@@ -41,6 +48,7 @@ namespace Model
         {
             component.Activate(this);
             ((IRoot) this).AddComponent(component);
+            component.GameObject.transform.SetParent(gameObject.transform);
         }
 
         public bool LostConnect(IComponent component) => ((IRoot) this).RemoveComponent(component);

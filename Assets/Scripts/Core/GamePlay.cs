@@ -11,6 +11,7 @@ namespace Core
         [SerializeField] private float m_EnemyRootGenerateFrequency;
         [SerializeField] private float m_MaxDeactiveComponentCount;
         [SerializeField] private float m_MaxEnemyRootCount;
+        [SerializeField] private KeyCode m_ConnectKey;
         private float m_ComponentsCountdown;
         private float m_RootsCountdown;
 
@@ -23,7 +24,7 @@ namespace Core
             m_Systems = new ISystem[]
             {
                 new AttackSystem(),
-                new ConnectSystem(),
+                new ConnectSystem(m_ConnectKey),
             };
             m_ComponentsGenerators = new ComponentsGenerator(map);
             m_EnemyRootGenerator = new EnemyRootsGenerator(map);
