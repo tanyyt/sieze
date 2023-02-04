@@ -4,6 +4,7 @@ namespace Core
 {
     public class Movement : MonoBehaviour
     {
+        public Map map;
         public float speed = 1f;
         public float angularSpeed = 20f;
         public float minimulAngle = 5f;
