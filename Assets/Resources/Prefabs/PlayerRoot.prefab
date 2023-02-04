@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 7471412133258792111}
   - component: {fileID: 7471412133258792110}
   - component: {fileID: 7471412133258792099}
+  - component: {fileID: 656899708}
   m_Layer: 0
   m_Name: PlayerRoot
   m_TagString: Untagged
@@ -296,10 +297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e80b1f9e72bbd2439dba4ccec656151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
   speed: 3
   angularSpeed: 60
-  minimulAngle: 5
+  minimulAngle: 0
 --- !u!50 &7471412133258792111
 Rigidbody2D:
   serializedVersion: 4
@@ -350,3 +350,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 7471412133258792108}
+  left: 106
+  right: 107
+--- !u!114 &656899708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7471412133258792105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781a30920bc4496d96918ed845c4bef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxHp: 14

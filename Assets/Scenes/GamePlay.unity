@@ -243,24 +243,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &656899702 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7471412133258792105, guid: 235517e64fc06455b8d0b98ee4ccd7ef, type: 3}
-  m_PrefabInstance: {fileID: 7471412133189522234}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &656899708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 656899702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 781a30920bc4496d96918ed845c4bef2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MaxHp: 14
 --- !u!1 &672066368
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +373,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -813,9 +795,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerRoot
       objectReference: {fileID: 0}
-    - target: {fileID: 7471412133258792108, guid: 235517e64fc06455b8d0b98ee4ccd7ef, type: 3}
-      propertyPath: map
-      value: 
-      objectReference: {fileID: 1542421659}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 235517e64fc06455b8d0b98ee4ccd7ef, type: 3}
