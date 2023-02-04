@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Core;
 using Sirenix.OdinInspector;
@@ -55,6 +54,12 @@ namespace Model
                     component = (T) item;
                     return true;
                 }
+
+                // 找子节点的component
+                if(item is IConnectorComponent connector && connector.RequireComponent(out component))
+                {
+                    return true;
+                }
             }
 
             component = default;
@@ -69,12 +74,31 @@ namespace Model
             }
         }
 
-        void IRoot.AddComponent(IComponent component) => m_Components.Add(component);
+        void IConnector.AddComponent(IComponent component) => m_Components.Add(component);
 
-        bool IRoot.RemoveComponent(IComponent component) => m_Components.Remove(component);
+        bool IConnector.RemoveComponent(IComponent component) => m_Components.Remove(component);
 
         public IEnumerator<IComponent> GetEnumerator() => m_Components.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public void RequireComponents<T>(List<T> components) where T : IComponent
+        {
+            components.Clear();
+            foreach (var item in m_Components)
+            {
+                if (typeof(T).IsAssignableFrom(item.GetType()))
+                {
+                    components.Add((T)item);
+                }
+
+                if(item is IConnectorComponent connector)
+                {
+                    var childComps = new List<T>();
+                    connector.RequireComponents(childComps);
+                    components.AddRange(childComps);
+                }
+            }
+        }
     }
 }

@@ -20,7 +20,8 @@ namespace Core
         {
             m_Systems = new ISystem[]
             {
-                new AttackSystem()
+                new AttackSystem(),
+                new ConnectSystem(),
             };
             m_ComponentsGenerators = new ComponentsGenerator(map);
             m_EnemyRootGenerator = new EnemyRootsGenerator(map);

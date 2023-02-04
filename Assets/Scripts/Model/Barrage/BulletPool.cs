@@ -11,7 +11,9 @@ namespace Model
         {
             if (s_Pool.Count > 0)
             {
-                return s_Pool.Pop();
+                var bullet = s_Pool.Pop();
+                bullet.gameObject.SetActive(true);
+                return bullet;
             }
             return Object.Instantiate(Resources.Load<Bullet>("Prefabs/Bullet"));
         }

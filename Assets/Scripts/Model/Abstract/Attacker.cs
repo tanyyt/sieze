@@ -5,7 +5,6 @@ namespace Model
 {
     public abstract class Attacker : ComponentBase, IAttacker
     {
-        
         [ReadOnly]
         [ShowInInspector]
         bool m_IsCooling = false;

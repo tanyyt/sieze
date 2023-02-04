@@ -324,8 +324,8 @@ MonoBehaviour:
   map: {fileID: 1542421659}
   m_ComponentGenerateFrequency: 6
   m_EnemyRootGenerateFrequency: 6
-  m_MaxDeactiveComponentCount: 2
-  m_MaxEnemyRootCount: 1
+  m_MaxDeactiveComponentCount: 15
+  m_MaxEnemyRootCount: 4
 --- !u!4 &721992505
 Transform:
   m_ObjectHideFlags: 0
@@ -334,7 +334,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721992503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.443071, y: 2.5847385, z: -0.0720264}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

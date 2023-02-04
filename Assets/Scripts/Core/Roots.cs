@@ -8,6 +8,8 @@ namespace Core
     public class Roots : LazySingleton<Roots>, IEnumerable<IRoot>
     {
         public int Count => m_Roots.Count;
+        public Root playerRoot;
+
         private readonly List<IRoot> m_Roots = new();
 
         public void AddRoot(IRoot root)
