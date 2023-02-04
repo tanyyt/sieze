@@ -12,8 +12,10 @@ namespace Model
         private float m_ConnectRange;
         [SerializeField]
         private CircleCollider2D m_CircleCollider;
-
         private readonly List<IComponent> m_Components = new();
+        private AudioSource audioSource;
+
+        private void Awake() => audioSource = GetComponent<AudioSource>();
 
         public override int MaxHp => m_MaxHp;
 
@@ -28,6 +30,11 @@ namespace Model
 
         public void Connect(IComponent component)
         {
+            if (Root is PlayerRoot)
+            {
+                Debug.Log("Connect");
+                audioSource.Play();
+            }
             component.Activate(Root, this);
             ((IConnector)this).AddComponent(component);
             component.GameObject.transform.SetParent(GameObject.transform);

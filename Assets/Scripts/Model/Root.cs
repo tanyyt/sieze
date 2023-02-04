@@ -48,7 +48,7 @@ namespace Model
             }
         }
         
-        public void Connect(IComponent component)
+        public virtual void Connect(IComponent component)
         {
             component.Activate(this, this);
             ((IRoot) this).AddComponent(component);
