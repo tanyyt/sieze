@@ -25,8 +25,9 @@ namespace Core
             bool IConnector.LostConnect(IComponent component) => m_Root.LostConnect(component);
 
             bool IComponent.IsInConnectorRange => throw new System.NotImplementedException();
+            IConnector IComponent.Connector => throw new System.NotImplementedException();
 
-            void IComponent.Activate(IRoot root)
+            void IComponent.Activate(IRoot root, IConnector connector)
             {
                 throw new System.NotImplementedException();
             }

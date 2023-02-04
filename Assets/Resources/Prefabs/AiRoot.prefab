@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   angularSpeed: 60
-  minimulAngle: 5
+  minimulAngle: 1
 --- !u!50 &4965301157926601946
 Rigidbody2D:
   serializedVersion: 4
@@ -172,3 +172,4 @@ MonoBehaviour:
   m_MaxHp: 14
   m_ConnectRange: 0
   m_CircleCollider: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}

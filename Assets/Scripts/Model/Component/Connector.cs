@@ -20,20 +20,26 @@ namespace Model
         int IConnector.Count => m_Components.Count;
         float IConnector.ConnectRange => m_ConnectRange;
 
-        public override void Activate(IRoot root)
+        public override void Activate(IRoot root, IConnector connector)
         {
-            base.Activate(root);
+            base.Activate(root, connector);
             m_CircleCollider.radius = Mathf.Sqrt(m_ConnectRange);
         }
 
         public void Connect(IComponent component)
         {
-            component.Activate(Root);
-            ((IRoot)this).AddComponent(component);
+            component.Activate(Root, this);
+            ((IConnector)this).AddComponent(component);
             component.GameObject.transform.SetParent(GameObject.transform);
         }
 
-        public bool LostConnect(IComponent component) => ((IRoot)this).RemoveComponent(component);
+        public bool LostConnect(IComponent component)
+        {
+            component.Deactivate();
+            bool isSuccess = ((IConnector)this).RemoveComponent(component);
+            component.GameObject.transform.SetParent(null);
+            return isSuccess;
+        }
 
         public IEnumerator<IComponent> GetEnumerator()
         {

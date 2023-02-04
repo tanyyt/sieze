@@ -1223,6 +1223,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8389001498484062992, guid: 235517e64fc06455b8d0b98ee4ccd7ef, type: 3}
+      propertyPath: m_LineColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8389001498484062992, guid: 235517e64fc06455b8d0b98ee4ccd7ef, type: 3}
+      propertyPath: m_LineColor.b
+      value: 0.5088457
+      objectReference: {fileID: 0}
+    - target: {fileID: -8389001498484062992, guid: 235517e64fc06455b8d0b98ee4ccd7ef, type: 3}
+      propertyPath: m_LineColor.g
+      value: 3.018868
+      objectReference: {fileID: 0}
+    - target: {fileID: -8389001498484062992, guid: 235517e64fc06455b8d0b98ee4ccd7ef, type: 3}
+      propertyPath: m_LineColor.r
+      value: 0.27055883
+      objectReference: {fileID: 0}
     - target: {fileID: 7471412133258792098, guid: 235517e64fc06455b8d0b98ee4ccd7ef, type: 3}
       propertyPath: m_RootOrder
       value: 9

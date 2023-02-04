@@ -4,8 +4,8 @@ namespace Model
 {
     public interface IEntity
     {
-        public GameObject GameObject { get;}
-        public int MaxHp { get; }
-        public void Hurt(int damage);
+        GameObject GameObject { get;}
+        int MaxHp { get; }
+        void Hurt(int damage);
     }
 }

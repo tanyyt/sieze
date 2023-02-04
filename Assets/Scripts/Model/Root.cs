@@ -11,12 +11,16 @@ namespace Model
         [SerializeField] private int m_MaxHp;
         [SerializeField] private float m_ConnectRange;
         [SerializeField] private CircleCollider2D m_CircleCollider;
+        [SerializeField, ColorUsage(true, hdr: true)] private Color m_Color;
+        [SerializeField, ColorUsage(true, hdr: true)] private Color m_LineColor;
         [ReadOnly] [ShowInInspector] private int m_Hp;
         private readonly List<IComponent> m_Components = new();
         public GameObject GameObject => gameObject;
         public int MaxHp => m_MaxHp;
         public int Count => m_Components.Count;
         public float ConnectRange => m_ConnectRange;
+        public Color Color => m_Color;
+        public Color LineColor => m_LineColor;
 
         protected virtual void Awake()
         {
@@ -46,12 +50,18 @@ namespace Model
         
         public void Connect(IComponent component)
         {
-            component.Activate(this);
+            component.Activate(this, this);
             ((IRoot) this).AddComponent(component);
             component.GameObject.transform.SetParent(gameObject.transform);
         }
 
-        public bool LostConnect(IComponent component) => ((IRoot) this).RemoveComponent(component);
+        public bool LostConnect(IComponent component)
+        {
+            component.Deactivate();
+            bool isSuccess = ((IRoot)this).RemoveComponent(component);
+            component.GameObject.transform.SetParent(null);
+            return isSuccess;
+        }
 
         public bool RequireComponent<T>(out T component) where T : IComponent
         {
