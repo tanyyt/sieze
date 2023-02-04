@@ -15,7 +15,7 @@ namespace Model
         public GameObject GameObject => gameObject;
         public int MaxHp => m_MaxHp;
         public int Count => m_Components.Count;
-        
+
         //todo: delete this method
         protected virtual void Awake()
         {
@@ -25,11 +25,15 @@ namespace Model
         public void Hurt(int damage)
         {
             m_Hp -= damage;
+            if (m_Hp <= 0)
+            {
+                DeactivateComponents();
+            }
         }
-
+        
         public void Connect(IComponent component)
         {
-            component.Initialize(this);
+            component.Activate(this);
             ((IRoot) this).AddComponent(component);
         }
 
@@ -45,19 +49,22 @@ namespace Model
                     return true;
                 }
             }
+
             component = default;
             return false;
         }
 
-        void IRoot.AddComponent(IComponent component)
+        private void DeactivateComponents()
         {
-            m_Components.Add(component);
+            foreach (var component in m_Components)
+            {
+                component.Deactivate();
+            }
         }
 
-        bool IRoot.RemoveComponent(IComponent component)
-        {
-            return m_Components.Remove(component);
-        }
+        void IRoot.AddComponent(IComponent component) => m_Components.Add(component);
+
+        bool IRoot.RemoveComponent(IComponent component) => m_Components.Remove(component);
 
         public IEnumerator<IComponent> GetEnumerator()
         {
