@@ -1,7 +1,8 @@
 ﻿namespace Model
 {
-    public interface IAttacker
+    public interface IAttacker : IComponent
     {
-        public int Atk { get; }
+        bool IsCooling { get; }
+        void Attack(IRoot root);
     }
 }
