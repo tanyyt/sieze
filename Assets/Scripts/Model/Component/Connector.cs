@@ -62,15 +62,15 @@ namespace Model
 
         public bool LostConnect(IComponent component)
         {
-            component.Deactivate();
             bool isSuccess = ((IConnector)this).RemoveComponent(component);
+            Root.RecalculateSpeed();
+            component.Deactivate();
             component.GameObject.transform.SetParent(null);
             if (m_C2LDict.TryGetValue(component, out var line))
             {
                 m_C2LDict.Remove(component);
                 Destroy(line);
             }
-            Root.RecalculateSpeed();
             return isSuccess;
         }
 

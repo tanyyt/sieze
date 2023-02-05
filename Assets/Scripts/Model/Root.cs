@@ -110,7 +110,7 @@ namespace Model
             }
         }
 
-        protected void ConnectCompsInChildren(IConnector connector, GameObject go)
+        public void ConnectCompsInChildren(IConnector connector, GameObject go)
         {
             int childCount = go.transform.childCount;
             for (int i = 0; i < childCount; i++)
@@ -164,7 +164,7 @@ namespace Model
             {
                 total += conn.Count;
             }
-            float rate = 1f / Mathf.Log(total);
+            float rate = 1f / (Mathf.Log(total) * 0.25f + 1f);
             m_Movement.SetSpeedRate(rate);
         }
     }
