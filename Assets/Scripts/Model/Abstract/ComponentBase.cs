@@ -36,16 +36,16 @@ namespace Model
 
         public IRoot Root { get; private set; }
 
-        void OnDestroy()
+        protected virtual void OnDestroy()
         {
             DeactivateComponents.Instance.RemoveComponent(this);
         }
 
-        void Update()
+        protected virtual void Update()
         {
             if(Root == null)
             {
-                transform.up = transform.up + Time.deltaTime * 5f * transform.right;
+                transform.up = Quaternion.AngleAxis(45f * Time.deltaTime, Vector3.forward) * transform.up;
             }
         }
 

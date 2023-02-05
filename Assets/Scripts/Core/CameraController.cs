@@ -20,14 +20,20 @@ namespace Core
         {
             if (GamePlay.isGameOver)
                 return;
-            m_Animator?.Play("ShortShake");
+            if (null != m_Animator)
+            {
+                m_Animator.Play("ShortShake");
+            }
         }
 
         private void HugeShake()
         {
             if (GamePlay.isGameOver)
                 return;
-            m_Animator?.Play("Shake");
+            if(null != m_Animator)
+            {
+                m_Animator.Play("Shake");
+            }
         }
 
         void FixedUpdate()

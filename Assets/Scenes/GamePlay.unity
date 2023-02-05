@@ -373,7 +373,7 @@ MonoBehaviour:
   map: {fileID: 1542421659}
   m_ComponentGenerateFrequency: 6
   m_EnemyRootGenerateFrequency: 0.5
-  m_MaxDeactiveComponentCount: 15
+  m_MaxDeactiveComponentCount: 1
   m_MaxEnemyRootCount: 4
   m_ConnectKey: 108
 --- !u!4 &721992505

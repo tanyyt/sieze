@@ -212,8 +212,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ConnectorTag: ConnectorRange
   m_Collider: {fileID: 4425177768508820314}
-  m_DeactivateColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
+  m_DeactivateColor: {r: 2.1185474, g: 2.1185474, b: 2.1185474, a: 1}
   m_InConnectorRangeColor: {r: 2.164, g: 0.57096314, b: 0.0930521, a: 1}
+  m_HurtColor: {r: 0, g: 0, b: 0, a: 0}
   m_Renderers:
   - {fileID: 591624047650937889}
   - {fileID: 8864378729411910371}

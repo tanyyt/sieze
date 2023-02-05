@@ -42,6 +42,6 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _HdrTint: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
+    - _HdrTint: {r: 1.8634343, g: 1.8634343, b: 1.8634343, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

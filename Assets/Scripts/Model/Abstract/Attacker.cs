@@ -18,8 +18,9 @@ namespace Model
             m_IsCooling = false;
         }
 
-        void Update()
+        protected override void Update()
         {
+            base.Update();
             m_Countdown += Time.deltaTime;
             if (m_Countdown > coolingTime)
             {
