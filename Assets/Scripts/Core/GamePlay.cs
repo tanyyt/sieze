@@ -17,10 +17,11 @@ namespace Core
 
         private ComponentsGenerator m_ComponentsGenerators;
         private EnemyRootsGenerator m_EnemyRootGenerator;
-        private bool m_IsGameOver;
+        public static bool isGameOver;
 
         void Awake()
         {
+            isGameOver = false;
             m_Systems = new ISystem[]
             {
                 new AttackSystem(),
@@ -33,13 +34,13 @@ namespace Core
 
         void GameOver()
         {
-            m_IsGameOver = true;   
+            isGameOver = true;   
             Debug.Log("Game Over");
         }
 
         void Update()
         {
-            if (m_IsGameOver) return;
+            if (isGameOver) return;
             
             m_ComponentsCountdown += Time.deltaTime;
             m_RootsCountdown += Time.deltaTime;

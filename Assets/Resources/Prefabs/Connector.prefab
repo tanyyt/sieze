@@ -77,7 +77,7 @@ Transform:
   m_GameObject: {fileID: 8736200317886553766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2139605643999538614}
@@ -125,12 +125,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2866628b93334efe93eb10a9e4035ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 1
+  m_Size: {x: 0.5, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -157,7 +157,6 @@ MonoBehaviour:
   m_MaxHp: 5
   m_ConnectRange: 5
   m_CircleCollider: {fileID: 5377737398627904607}
-  m_LineColor: {r: 0.1513092, g: 1.6055588, b: 0.27740023, a: 1}
   m_LineRenderer: {fileID: 622256164829482892, guid: 58d75bfff5da6413da7ac0dc0ee3f273, type: 3}
 --- !u!58 &4910655591526582431
 CircleCollider2D:
@@ -172,9 +171,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.0018202737}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.2506219
 --- !u!82 &-4340324567204995829
 AudioSource:
   m_ObjectHideFlags: 0

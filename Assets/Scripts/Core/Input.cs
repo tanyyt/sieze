@@ -10,6 +10,11 @@ namespace Core
 
         void Update()
         {
+            if(GamePlay.isGameOver)
+            {
+                return;
+            }
+
             var horizontal = UnityEngine.Input.GetAxisRaw("Horizontal");
             var vertical = UnityEngine.Input.GetAxisRaw("Vertical");
             movement.SetDirection(Vector3.right * horizontal + Vector3.up * vertical);
