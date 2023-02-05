@@ -10,6 +10,7 @@ namespace Model
             base.OnDestroy();
             if(!GamePlay.isGameOver)
             {
+                EnemyRootsGenerator.PutWinnerAsStructure(Roots.Instance.playerRoot);
                 EventScheduler<GameEvent>.Global[GameEvent.GameOver].Broadcast();
             }
         }
