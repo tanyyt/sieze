@@ -11,6 +11,7 @@ namespace Core
     {
         public GameObject RestartUI;
         public Button BtnRestart;
+        public Text HpText;
 
         void Awake()
         {
@@ -23,6 +24,18 @@ namespace Core
                 GameEvent.cameraShortShake = null;
                 SceneManager.LoadScene("Main");
             });
+        }
+
+        void Update()
+        {
+            if(null != Roots.Instance.playerRoot)
+            {
+                HpText.text = string.Format("HP:{0}", Roots.Instance.playerRoot.Hp);
+            }
+            else
+            {
+                HpText.text = string.Format("HP:{0}", 0);
+            }
         }
 
         void ShowEndingUI()

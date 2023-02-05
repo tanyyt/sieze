@@ -30,6 +30,7 @@ namespace Model
         public Color HurtColor => m_HurtColor;
         public Color Color => m_Color;
         public Color LineColor => m_LineColor;
+        public int Hp => m_Hp;
 
         protected virtual void Awake()
         {
