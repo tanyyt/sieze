@@ -53,7 +53,7 @@ namespace Model
             }
         }
         
-        public void Connect(IComponent component)
+        public virtual void Connect(IComponent component)
         {
             var line = Instantiate(m_LineRenderer);
             line.SetPositions(new[] { line.transform.InverseTransformPoint(gameObject.transform.position), line.transform.InverseTransformPoint(component.GameObject.transform.position) });

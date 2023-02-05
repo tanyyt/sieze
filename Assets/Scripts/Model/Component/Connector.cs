@@ -19,11 +19,16 @@ namespace Model
 
         private readonly List<IComponent> m_Components = new();
         private readonly Dictionary<IComponent, LineRenderer> m_C2LDict = new();
+        private AudioSource m_AudioSource;
 
         public override int MaxHp => m_MaxHp;
-
         int IConnector.Count => m_Components.Count;
         float IConnector.ConnectRange => m_ConnectRange;
+
+        void Awake()
+        {
+            m_AudioSource = GetComponent<AudioSource>();
+        }
 
         public override void Activate(IRoot root, IConnector connector)
         {
@@ -42,6 +47,8 @@ namespace Model
 
         public void Connect(IComponent component)
         {
+            if(Root is PlayerRoot)
+                m_AudioSource.Play();
             var line = Instantiate(m_LineRenderer);
             line.SetPositions(new[] { line.transform.InverseTransformPoint(gameObject.transform.position), line.transform.InverseTransformPoint(component.GameObject.transform.position) });
             component.Activate(Root, this);
