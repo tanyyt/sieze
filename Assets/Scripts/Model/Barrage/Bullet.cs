@@ -1,4 +1,5 @@
 ﻿using System;
+using Core;
 using UnityEngine;
 
 namespace Model
@@ -29,7 +30,7 @@ namespace Model
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             m_Damage = damage;
             var color = Color.Lerp(m_CurColor, shooter.Color, 0.65f);
-            GetComponent<SpriteRenderer>().material.SetColor(s_ShaderColorId,color);
+            GetComponent<SpriteRenderer>().material.SetColor(s_ShaderColorId, color);
         }
 
         private void OnEnable()
@@ -58,6 +59,7 @@ namespace Model
                     || (entity is Root && entity != m_Shooter)))
             {
                 entity.Hurt(m_Damage);
+                ParticlePool.Instance.Play(m_Shooter,entity.GameObject.transform.position);
                 BulletPool.Push(this);
             }
         }
