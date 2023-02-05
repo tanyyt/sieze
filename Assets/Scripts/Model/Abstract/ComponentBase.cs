@@ -63,7 +63,11 @@ namespace Model
 
         protected virtual void Warning()
         {
-            StartCoroutine(GameUtils.HurtCoroutine(m_Renderers, s_ShaderColorId, Root));
+            var curCol = m_Renderers[0].material.GetColor(s_ShaderColorId);
+            var rootCol = Root.Color;
+            var diff = Mathf.Abs(Vector3.Dot(new Vector3(curCol.r, curCol.g, curCol.b).normalized , new Vector3(rootCol.r, rootCol.g, rootCol.b).normalized));
+            if(diff > 0.75f)
+                StartCoroutine(GameUtils.HurtCoroutine(m_Renderers, s_ShaderColorId, Root));
         }
 
         public virtual void Deactivate()

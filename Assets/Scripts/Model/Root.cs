@@ -14,9 +14,16 @@ namespace Model
         [SerializeField] private int m_MaxHp;
         [SerializeField] private float m_ConnectRange;
         [SerializeField] private CircleCollider2D m_CircleCollider;
-        [SerializeField, ColorUsage(true, hdr: true)] private Color m_Color;
-        [SerializeField, ColorUsage(true, hdr: true)] private Color m_LineColor;
-        [SerializeField, ColorUsage(true, hdr: true)] private Color m_HurtColor;
+
+        [SerializeField, ColorUsage(true, hdr: true)]
+        private Color m_Color;
+
+        [SerializeField, ColorUsage(true, hdr: true)]
+        private Color m_LineColor;
+
+        [SerializeField, ColorUsage(true, hdr: true)]
+        private Color m_HurtColor;
+
         [SerializeField] private LineRenderer m_LineRenderer;
         [SerializeField] private Movement m_Movement;
         [ReadOnly] [ShowInInspector] private int m_Hp;
@@ -35,10 +42,11 @@ namespace Model
         {
             m_Renderer = GetComponent<SpriteRenderer>();
             m_Hp = m_MaxHp;
-            if(null != m_CircleCollider)
+            if (null != m_CircleCollider)
             {
                 m_CircleCollider.radius = Mathf.Sqrt(m_ConnectRange);
             }
+
             Roots.Instance.AddRoot(this);
             ConnectCompsInChildren(this, gameObject);
         }
@@ -60,34 +68,38 @@ namespace Model
             }
             else
             {
-                StartCoroutine(GameUtils.HurtCoroutine(m_Renderer, s_ShaderColorId, this));
+                var curCol = m_Renderer.material.GetColor(s_ShaderColorId);
+                var diff = Mathf.Abs(Vector3.Dot(new Vector3(curCol.r, curCol.g, curCol.b).normalized, new Vector3(Color.r, Color.g, Color.b).normalized));
+                if(diff > 0.75f)
+                    StartCoroutine(GameUtils.HurtCoroutine(m_Renderer, s_ShaderColorId, this));
             }
         }
-        
+
         public virtual void Connect(IComponent component)
         {
             var line = Instantiate(m_LineRenderer);
-            line.SetPositions(new[] { line.transform.InverseTransformPoint(gameObject.transform.position), line.transform.InverseTransformPoint(component.GameObject.transform.position) });
+            line.SetPositions(new[] {line.transform.InverseTransformPoint(gameObject.transform.position), line.transform.InverseTransformPoint(component.GameObject.transform.position)});
             component.Activate(this, this);
             ((IRoot) this).AddComponent(component);
             component.GameObject.transform.SetParent(gameObject.transform);
             line.transform.SetParent(gameObject.transform);
             line.material.SetColor(s_ShaderColorId, m_LineColor);
             m_C2LDict.Add(component, line);
-            ((IRoot)this).RecalculateSpeed();
+            ((IRoot) this).RecalculateSpeed();
         }
 
         public bool LostConnect(IComponent component)
         {
             component.Deactivate();
-            bool isSuccess = ((IRoot)this).RemoveComponent(component);
+            bool isSuccess = ((IRoot) this).RemoveComponent(component);
             component.GameObject.transform.SetParent(null);
-            if(m_C2LDict.TryGetValue(component, out var line))
+            if (m_C2LDict.TryGetValue(component, out var line))
             {
                 m_C2LDict.Remove(component);
                 Destroy(line);
             }
-            ((IRoot)this).RecalculateSpeed();
+
+            ((IRoot) this).RecalculateSpeed();
             return isSuccess;
         }
 
@@ -102,7 +114,7 @@ namespace Model
                 }
 
                 // 找子节点的component
-                if(item is IConnectorComponent connector && connector.RequireComponent(out component))
+                if (item is IConnectorComponent connector && connector.RequireComponent(out component))
                 {
                     return true;
                 }
@@ -152,10 +164,10 @@ namespace Model
             {
                 if (typeof(T).IsAssignableFrom(item.GetType()))
                 {
-                    components.Add((T)item);
+                    components.Add((T) item);
                 }
 
-                if(item is IConnectorComponent connector)
+                if (item is IConnectorComponent connector)
                 {
                     var childComps = new List<T>();
                     connector.RequireComponents(childComps);
@@ -170,10 +182,11 @@ namespace Model
         {
             int total = Count + 1;
             RequireComponents(m_Connectors);
-            foreach(var conn in m_Connectors)
+            foreach (var conn in m_Connectors)
             {
                 total += conn.Count;
             }
+
             float rate = 1f / Mathf.Log(total);
             m_Movement.SetSpeedRate(rate);
         }
