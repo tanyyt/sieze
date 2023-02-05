@@ -157,6 +157,8 @@ MonoBehaviour:
   m_MaxHp: 5
   m_ConnectRange: 5
   m_CircleCollider: {fileID: 5377737398627904607}
+  m_LineColor: {r: 0.1513092, g: 1.6055588, b: 0.27740023, a: 1}
+  m_LineRenderer: {fileID: 622256164829482892, guid: 58d75bfff5da6413da7ac0dc0ee3f273, type: 3}
 --- !u!58 &4910655591526582431
 CircleCollider2D:
   m_ObjectHideFlags: 0

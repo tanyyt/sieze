@@ -6,21 +6,29 @@ namespace Model
 {
     public class Connector : ComponentBase, IConnectorComponent
     {
+        private static readonly int s_ShaderColorId = Shader.PropertyToID("_HdrTint");
+
         [SerializeField]
         private int m_MaxHp;
         [SerializeField]
         private float m_ConnectRange;
         [SerializeField]
         private CircleCollider2D m_CircleCollider;
-        private readonly List<IComponent> m_Components = new();
-        private AudioSource audioSource;
+        [SerializeField, ColorUsage(true, hdr: true)] private Color m_LineColor;
+        [SerializeField] private LineRenderer m_LineRenderer;
 
-        private void Awake() => audioSource = GetComponent<AudioSource>();
+        private readonly List<IComponent> m_Components = new();
+        private readonly Dictionary<IComponent, LineRenderer> m_C2LDict = new();
+        private AudioSource m_AudioSource;
 
         public override int MaxHp => m_MaxHp;
-
         int IConnector.Count => m_Components.Count;
         float IConnector.ConnectRange => m_ConnectRange;
+
+        void Awake()
+        {
+            m_AudioSource = GetComponent<AudioSource>();
+        }
 
         public override void Activate(IRoot root, IConnector connector)
         {
@@ -30,14 +38,16 @@ namespace Model
 
         public void Connect(IComponent component)
         {
-            if (Root is PlayerRoot)
-            {
-                Debug.Log("Connect");
-                audioSource.Play();
-            }
+            if(Root is PlayerRoot)
+                m_AudioSource.Play();
+            var line = Instantiate(m_LineRenderer);
+            line.SetPositions(new[] { line.transform.InverseTransformPoint(gameObject.transform.position), line.transform.InverseTransformPoint(component.GameObject.transform.position) });
             component.Activate(Root, this);
             ((IConnector)this).AddComponent(component);
-            component.GameObject.transform.SetParent(GameObject.transform);
+            component.GameObject.transform.SetParent(gameObject.transform);
+            line.transform.SetParent(gameObject.transform);
+            line.material.SetColor(s_ShaderColorId, m_LineColor);
+            m_C2LDict.Add(component, line);
         }
 
         public bool LostConnect(IComponent component)
@@ -45,6 +55,11 @@ namespace Model
             component.Deactivate();
             bool isSuccess = ((IConnector)this).RemoveComponent(component);
             component.GameObject.transform.SetParent(null);
+            if (m_C2LDict.TryGetValue(component, out var line))
+            {
+                m_C2LDict.Remove(component);
+                Destroy(line);
+            }
             return isSuccess;
         }
 

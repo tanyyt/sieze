@@ -21,10 +21,11 @@ namespace Model
             base.Connect(component);
         }
 
-        void OnDestroy()
+        protected override void OnDestroy()
         {
             Roots.Instance.playerRoot = null;
             EventScheduler<GameEvent>.Global[GameEvent.GameOver].Broadcast();
+            base.OnDestroy();
         }
     }
 }
