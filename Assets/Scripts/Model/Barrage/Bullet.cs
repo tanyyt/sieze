@@ -58,6 +58,7 @@ namespace Model
                 && ((entity is IComponent component && component.Root != null && component.Root != m_Shooter)
                     || (entity is Root && entity != m_Shooter)))
             {
+                GameEvent.cameraShortShake?.Invoke();
                 entity.Hurt(m_Damage);
                 ParticlePool.Instance.Play(m_Shooter,entity.GameObject.transform.position);
                 BulletPool.Push(this);

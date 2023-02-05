@@ -19,6 +19,8 @@ namespace Core
             {
                 BulletPool.ClearPool();
                 GameEvent.gameOverEvent = null;
+                GameEvent.cameraHugeShake = null;
+                GameEvent.cameraShortShake = null;
                 SceneManager.LoadScene("GamePlay");
             });
         }

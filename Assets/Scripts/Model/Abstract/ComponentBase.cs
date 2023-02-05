@@ -60,7 +60,10 @@ namespace Model
         {
             Hp -= damage;
             if (Hp <= 0)
+            {
+                GameEvent.cameraHugeShake?.Invoke();
                 Connector.LostConnect(this);
+            }
             else
                 Warning();
         }

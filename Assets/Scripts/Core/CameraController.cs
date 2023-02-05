@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Core
@@ -6,6 +7,28 @@ namespace Core
     {
         public float smoothTime = 1f;
         public Transform target;
+        private Animator m_Animator;
+
+        private void Awake()
+        {
+            m_Animator = GetComponent<Animator>();
+            GameEvent.cameraHugeShake += HugeShake;
+            GameEvent.cameraShortShake += ShortShake;
+        }
+
+        private void ShortShake()
+        {
+            if (GamePlay.isGameOver)
+                return;
+            m_Animator?.Play("ShortShake");
+        }
+
+        private void HugeShake()
+        {
+            if (GamePlay.isGameOver)
+                return;
+            m_Animator?.Play("Shake");
+        }
 
         void FixedUpdate()
         {

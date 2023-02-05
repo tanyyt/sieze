@@ -45,6 +45,7 @@ namespace Model
 
         protected virtual void OnDestroy()
         {
+            GameEvent.cameraHugeShake?.Invoke();
             Roots.Instance.RemoveRoot(this);
         }
 
