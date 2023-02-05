@@ -25,6 +25,7 @@ namespace Core
 
         void ShowEndingUI()
         {
+            Debug.Log("Show UI");
             RestartUI.SetActive(true);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Model;
+using UnityEngine;
 using Utils;
 
 namespace Core
@@ -11,6 +12,17 @@ namespace Core
         public Root playerRoot;
 
         private readonly List<IRoot> m_Roots = new();
+
+        public Roots()
+        {
+            EventScheduler<GameEvent>.Global.RegisterOrSubscribe(GameEvent.GameOver, ClearRoots);
+        }
+
+        private void ClearRoots()
+        {
+            m_Roots.Clear();
+            Debug.Log("ClearRoots");
+        }
 
         public void AddRoot(IRoot root)
         {

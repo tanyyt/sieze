@@ -1,4 +1,5 @@
 using Core;
+using UnityEngine;
 using Utils;
 
 namespace Model
@@ -10,7 +11,9 @@ namespace Model
             base.OnDestroy();
             if(!GamePlay.isGameOver)
             {
-                EventScheduler<GameEvent>.Global[GameEvent.GameOver].Broadcast();
+                
+                Debug.Log($"EnemyRoot:  { EventScheduler<GameEvent>.Global[GameEvent.GameOver] == null}");
+                EventScheduler<GameEvent>.Global[GameEvent.GameOver]?.Broadcast();
             }
         }
     }

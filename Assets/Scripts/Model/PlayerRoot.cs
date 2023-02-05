@@ -22,10 +22,12 @@ namespace Model
 
         protected override void OnDestroy()
         {
+            base.OnDestroy();
             Roots.Instance.playerRoot = null;
             if(!GamePlay.isGameOver)
             {
-                EventScheduler<GameEvent>.Global[GameEvent.GameOver].Broadcast();
+                Debug.Log($"PlayerRoot:  { EventScheduler<GameEvent>.Global[GameEvent.GameOver] == null}");
+                EventScheduler<GameEvent>.Global[GameEvent.GameOver]?.Broadcast();
             }
         }
     }

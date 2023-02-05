@@ -63,7 +63,7 @@ namespace Model
         public bool LostConnect(IComponent component)
         {
             bool isSuccess = ((IConnector)this).RemoveComponent(component);
-            Root.RecalculateSpeed();
+            Root?.RecalculateSpeed();
             component.Deactivate();
             component.GameObject.transform.SetParent(null);
             if (m_C2LDict.TryGetValue(component, out var line))

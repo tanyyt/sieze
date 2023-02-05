@@ -21,6 +21,7 @@ namespace Core
 
         void Awake()
         {
+            EventScheduler<GameEvent>.Global.RegisterOrSubscribe(GameEvent.GameOver, GameOver);
             isGameOver = false;
             m_Systems = new ISystem[]
             {
@@ -29,13 +30,12 @@ namespace Core
             };
             m_ComponentsGenerators = new ComponentsGenerator(map);
             m_EnemyRootGenerator = new EnemyRootsGenerator(map);
-            EventScheduler<GameEvent>.Global.RegisterOrSubscribe(GameEvent.GameOver, GameOver);
         }
 
         void GameOver()
         {
-            isGameOver = true;   
             Debug.Log("Game Over");
+            isGameOver = true;   
         }
 
         void Update()
