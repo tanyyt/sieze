@@ -34,6 +34,7 @@ namespace Model
                 m_CircleCollider.radius = Mathf.Sqrt(m_ConnectRange);
             }
             Roots.Instance.AddRoot(this);
+            ConnectCompsInChildren(this, gameObject);
         }
 
         protected virtual void OnDestroy()
@@ -103,6 +104,23 @@ namespace Model
             foreach (var component in m_Components)
             {
                 component.Deactivate();
+            }
+        }
+
+        protected void ConnectCompsInChildren(IConnector connector, GameObject go)
+        {
+            int childCount = go.transform.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                var comp = go.transform.GetChild(i).GetComponent<IComponent>();
+                if (null != comp)
+                {
+                    connector.Connect(comp);
+                    if (comp is IConnectorComponent compConn)
+                    {
+                        ConnectCompsInChildren(compConn, compConn.GameObject);
+                    }
+                }
             }
         }
 

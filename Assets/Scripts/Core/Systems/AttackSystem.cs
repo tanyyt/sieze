@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Model;
+using Model.Component;
 using UnityEngine;
 
 namespace Core
@@ -19,10 +20,14 @@ namespace Core
                     var target = root.FindNearestRoot(AttackDistance);
                     if(target == null)
                         continue;
-                    
-                    var targetTrans = target.GameObject.transform;
-                    var attackerTrans = attacker.GameObject.transform;
-                    attackerTrans.LookAt2D(targetTrans);
+
+                    // 临时处理一下
+                    if (attacker is not FixedShooter)
+                    {
+                        var targetTrans = target.GameObject.transform;
+                        var attackerTrans = attacker.GameObject.transform;
+                        attackerTrans.LookAt2D(targetTrans);
+                    }
 
                     if (attacker.IsCooling)
                         continue;

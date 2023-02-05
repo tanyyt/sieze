@@ -31,6 +31,15 @@ namespace Model
             m_CircleCollider.radius = Mathf.Sqrt(m_ConnectRange);
         }
 
+        public override void Deactivate()
+        {
+            base.Deactivate();
+            for(int i = m_Components.Count - 1; i >= 0; i--)
+            {
+                LostConnect(m_Components[i]);
+            }
+        }
+
         public void Connect(IComponent component)
         {
             var line = Instantiate(m_LineRenderer);

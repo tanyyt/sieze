@@ -28,7 +28,6 @@ namespace Model
             }
         }
 
-
         public void Attack(IRoot root)
         {
             if (root == null) return;
@@ -39,7 +38,7 @@ namespace Model
             }
             else
             {
-                AttackEntity(transform.GetNearComponent(root));
+                AttackEntity(transform.GetNearEntity(root));
             }
         }
 
