@@ -1,7 +1,9 @@
-﻿namespace Core
+﻿using System;
+
+namespace Core
 {
-    public enum GameEvent
+    public static class GameEvent
     {
-        GameOver,
+        public static Action gameOverEvent;
     }
 }

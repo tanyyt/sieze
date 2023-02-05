@@ -478,7 +478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8736200317886553766, guid: c77eae06fdb224ef697690c326e8ed92, type: 3}
       propertyPath: m_Name
-      value: FixedShooter (1)
+      value: FixedShooter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c77eae06fdb224ef697690c326e8ed92, type: 3}
@@ -716,7 +716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8736200317886553766, guid: 9f32797c02970484bb55b2ba512b3397, type: 3}
       propertyPath: m_Name
-      value: Shooter (1)
+      value: Shooter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f32797c02970484bb55b2ba512b3397, type: 3}
@@ -895,7 +895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8736200317886553766, guid: 4c2dee9a628e34b7fb8b75afd07a4efe, type: 3}
       propertyPath: m_Name
-      value: Connector (2)
+      value: Connector
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c2dee9a628e34b7fb8b75afd07a4efe, type: 3}
@@ -1019,7 +1019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8736200317886553766, guid: 4c2dee9a628e34b7fb8b75afd07a4efe, type: 3}
       propertyPath: m_Name
-      value: Connector (1)
+      value: Connector
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c2dee9a628e34b7fb8b75afd07a4efe, type: 3}

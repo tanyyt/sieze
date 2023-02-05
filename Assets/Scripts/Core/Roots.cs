@@ -15,7 +15,7 @@ namespace Core
 
         public Roots()
         {
-            EventScheduler<GameEvent>.Global.RegisterOrSubscribe(GameEvent.GameOver, ClearRoots);
+            GameEvent.gameOverEvent += ClearRoots;
         }
 
         private void ClearRoots()

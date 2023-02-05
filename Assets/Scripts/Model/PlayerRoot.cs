@@ -26,8 +26,7 @@ namespace Model
             Roots.Instance.playerRoot = null;
             if(!GamePlay.isGameOver)
             {
-                Debug.Log($"PlayerRoot:  { EventScheduler<GameEvent>.Global[GameEvent.GameOver] == null}");
-                EventScheduler<GameEvent>.Global[GameEvent.GameOver]?.Broadcast();
+                GameEvent.gameOverEvent?.Invoke();
             }
         }
     }

@@ -14,11 +14,11 @@ namespace Core
 
         void Awake()
         {
-            EventScheduler<GameEvent>.Global.RegisterOrSubscribe(GameEvent.GameOver, ShowEndingUI);
+            GameEvent.gameOverEvent += ShowEndingUI;
             BtnRestart.onClick.AddListener(() =>
             {
                 BulletPool.ClearPool();
-                EventScheduler<GameEvent>.Global[GameEvent.GameOver].Clear();
+                GameEvent.gameOverEvent = null;
                 SceneManager.LoadScene("GamePlay");
             });
         }
@@ -32,7 +32,7 @@ namespace Core
         [Button]
         public static void GameOver()
         {
-             EventScheduler<GameEvent>.Global[GameEvent.GameOver].Broadcast();
+            GameEvent.gameOverEvent?.Invoke();
         }
     }
 }

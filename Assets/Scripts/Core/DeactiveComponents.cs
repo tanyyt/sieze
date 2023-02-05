@@ -13,7 +13,7 @@ namespace Core
 
         public DeactivateComponents()
         {
-            EventScheduler<GameEvent>.Global.RegisterOrSubscribe(GameEvent.GameOver,ClearComponents);
+            GameEvent.gameOverEvent += ClearComponents;
         }
 
         public readonly List<IComponent> m_DeactivateComponents = new List<IComponent>();

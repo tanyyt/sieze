@@ -36,6 +36,11 @@ namespace Model
 
         public IRoot Root { get; private set; }
 
+        void OnDestroy()
+        {
+            DeactivateComponents.Instance.RemoveComponent(this);
+        }
+
         public virtual void Activate(IRoot root, IConnector connector)
         {
             Hp = MaxHp;

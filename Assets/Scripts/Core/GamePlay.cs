@@ -21,7 +21,7 @@ namespace Core
 
         void Awake()
         {
-            EventScheduler<GameEvent>.Global.RegisterOrSubscribe(GameEvent.GameOver, GameOver);
+            GameEvent.gameOverEvent += GameOver;
             isGameOver = false;
             m_Systems = new ISystem[]
             {

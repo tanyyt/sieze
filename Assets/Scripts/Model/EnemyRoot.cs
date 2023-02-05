@@ -11,7 +11,7 @@ namespace Model
             if(!GamePlay.isGameOver)
             {
                 EnemyRootsGenerator.PutWinnerAsStructure(Roots.Instance.playerRoot);
-                EventScheduler<GameEvent>.Global[GameEvent.GameOver].Broadcast();
+                GameEvent.gameOverEvent?.Invoke();
             }
         }
     }
