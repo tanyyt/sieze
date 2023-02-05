@@ -9,6 +9,7 @@ namespace Model
 
         public static void ClearPool()
         {
+            Debug.Log("ClearPool");
             s_Pool.Clear();
         }
 

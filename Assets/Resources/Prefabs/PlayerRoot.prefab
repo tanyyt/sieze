@@ -263,8 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e80b1f9e72bbd2439dba4ccec656151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  angularSpeed: 60
+  speed: 4
+  angularSpeed: 90
   minimulAngle: 1
 --- !u!50 &7471412133258792111
 Rigidbody2D:
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_CircleCollider: {fileID: 1537532782927771923}
   m_Color: {r: 0.39840803, g: 1.2438196, b: 2.1535568, a: 1}
   m_LineColor: {r: 0.1513092, g: 1.6055588, b: 0.27740023, a: 1}
-  m_HurtColor: {r: 10.421803, g: 0, b: 0.4059885, a: 1}
+  m_HurtColor: {r: 6.119616, g: 0, b: 6.4222345, a: 1}
   m_LineRenderer: {fileID: 622256164829482892, guid: 58d75bfff5da6413da7ac0dc0ee3f273, type: 3}
   m_Movement: {fileID: 7471412133258792108}
 --- !u!82 &346089639

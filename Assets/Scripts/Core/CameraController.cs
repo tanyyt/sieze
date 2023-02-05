@@ -7,11 +7,11 @@ namespace Core
     {
         public float smoothTime = 1f;
         public Transform target;
+        [SerializeField]
         private Animator m_Animator;
 
         private void Awake()
         {
-            m_Animator = GetComponent<Animator>();
             GameEvent.cameraHugeShake += HugeShake;
             GameEvent.cameraShortShake += ShortShake;
         }

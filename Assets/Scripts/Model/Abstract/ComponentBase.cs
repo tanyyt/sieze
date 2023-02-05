@@ -41,6 +41,14 @@ namespace Model
             DeactivateComponents.Instance.RemoveComponent(this);
         }
 
+        void Update()
+        {
+            if(Root == null)
+            {
+                transform.up = transform.up + Time.deltaTime * 5f * transform.right;
+            }
+        }
+
         public virtual void Activate(IRoot root, IConnector connector)
         {
             Hp = MaxHp;

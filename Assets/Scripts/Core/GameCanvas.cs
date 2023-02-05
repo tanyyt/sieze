@@ -21,7 +21,7 @@ namespace Core
                 GameEvent.gameOverEvent = null;
                 GameEvent.cameraHugeShake = null;
                 GameEvent.cameraShortShake = null;
-                SceneManager.LoadScene("GamePlay");
+                SceneManager.LoadScene("Main");
             });
         }
 

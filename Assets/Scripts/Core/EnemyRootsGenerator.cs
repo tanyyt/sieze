@@ -52,7 +52,6 @@ namespace Core
         {
             foreach(var comp in s_WinnerStructure)
             {
-                Debug.Log(comp.compName);
                 GameObject go = Object.Instantiate(Resources.Load<GameObject>("Prefabs/" + comp.compName), root.GameObject.transform);
                 go.transform.localPosition = comp.localPos;
                 go.transform.localRotation = comp.localRot;
