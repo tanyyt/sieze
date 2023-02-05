@@ -11,8 +11,9 @@ namespace Core
         {
             m_ComponentNames = new string[]
             {
-                "Shooter",
+                //"Shooter",
                 "Connector",
+                "FixedShooter",
             };
         }
 

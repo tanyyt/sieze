@@ -18,6 +18,7 @@ namespace Model
         [SerializeField, ColorUsage(true, hdr: true)] private Color m_LineColor;
         [SerializeField, ColorUsage(true, hdr: true)] private Color m_HurtColor;
         [SerializeField] private LineRenderer m_LineRenderer;
+        [SerializeField] private Movement m_Movement;
         [ReadOnly] [ShowInInspector] private int m_Hp;
         private Renderer m_Renderer;
         private readonly List<IComponent> m_Components = new();
@@ -39,6 +40,7 @@ namespace Model
                 m_CircleCollider.radius = Mathf.Sqrt(m_ConnectRange);
             }
             Roots.Instance.AddRoot(this);
+            ConnectCompsInChildren(this, gameObject);
         }
 
         protected virtual void OnDestroy()
@@ -72,6 +74,7 @@ namespace Model
             line.transform.SetParent(gameObject.transform);
             line.material.SetColor(s_ShaderColorId, m_LineColor);
             m_C2LDict.Add(component, line);
+            ((IRoot)this).RecalculateSpeed();
         }
 
         public bool LostConnect(IComponent component)
@@ -84,6 +87,7 @@ namespace Model
                 m_C2LDict.Remove(component);
                 Destroy(line);
             }
+            ((IRoot)this).RecalculateSpeed();
             return isSuccess;
         }
 
@@ -116,6 +120,23 @@ namespace Model
             }
         }
 
+        protected void ConnectCompsInChildren(IConnector connector, GameObject go)
+        {
+            int childCount = go.transform.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                var comp = go.transform.GetChild(i).GetComponent<IComponent>();
+                if (null != comp)
+                {
+                    connector.Connect(comp);
+                    if (comp is IConnectorComponent compConn)
+                    {
+                        ConnectCompsInChildren(compConn, compConn.GameObject);
+                    }
+                }
+            }
+        }
+
         void IConnector.AddComponent(IComponent component) => m_Components.Add(component);
 
         bool IConnector.RemoveComponent(IComponent component) => m_Components.Remove(component);
@@ -141,6 +162,20 @@ namespace Model
                     components.AddRange(childComps);
                 }
             }
+        }
+
+        private List<IConnectorComponent> m_Connectors = new List<IConnectorComponent>();
+
+        void IRoot.RecalculateSpeed()
+        {
+            int total = Count + 1;
+            RequireComponents(m_Connectors);
+            foreach(var conn in m_Connectors)
+            {
+                total += conn.Count;
+            }
+            float rate = 1f / Mathf.Log(total);
+            m_Movement.SetSpeedRate(rate);
         }
     }
 }

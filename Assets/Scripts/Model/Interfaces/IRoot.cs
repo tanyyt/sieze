@@ -7,5 +7,7 @@ namespace Model
         Color HurtColor { get; }
         Color Color { get; }
         Color LineColor { get; }
+
+        void RecalculateSpeed();
     }
 }
