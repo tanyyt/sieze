@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Core;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Utils;
 
 namespace Model
 {
@@ -15,20 +16,24 @@ namespace Model
         [SerializeField] private CircleCollider2D m_CircleCollider;
         [SerializeField, ColorUsage(true, hdr: true)] private Color m_Color;
         [SerializeField, ColorUsage(true, hdr: true)] private Color m_LineColor;
+        [SerializeField, ColorUsage(true, hdr: true)] private Color m_HurtColor;
         [SerializeField] private LineRenderer m_LineRenderer;
         [SerializeField] private Movement m_Movement;
         [ReadOnly] [ShowInInspector] private int m_Hp;
         private readonly List<IComponent> m_Components = new();
         private readonly Dictionary<IComponent, LineRenderer> m_C2LDict = new();
+        private Renderer m_Renderer;
         public GameObject GameObject => gameObject;
         public int MaxHp => m_MaxHp;
         public int Count => m_Components.Count;
         public float ConnectRange => m_ConnectRange;
+        public Color HurtColor => m_HurtColor;
         public Color Color => m_Color;
         public Color LineColor => m_LineColor;
 
         protected virtual void Awake()
         {
+            m_Renderer = GetComponent<SpriteRenderer>();
             m_Hp = m_MaxHp;
             if(null != m_CircleCollider)
             {
@@ -51,6 +56,13 @@ namespace Model
                 DeactivateComponents();
                 Roots.Instance.RemoveRoot(this);
                 Destroy(gameObject);
+            }
+            else
+            {
+                var curCol = m_Renderer.material.GetColor(s_ShaderColorId);
+                var diff = Mathf.Abs(Vector3.Dot(new Vector3(curCol.r, curCol.g, curCol.b).normalized , new Vector3(Color.r, Color.g, Color.b).normalized));
+                if(diff > 0.75f)
+                    StartCoroutine(GameUtils.HurtCoroutine(m_Renderer, s_ShaderColorId, this));
             }
         }
         
