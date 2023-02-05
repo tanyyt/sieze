@@ -1,6 +1,10 @@
+using System.Collections;
 using Core;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Utils;
 
 namespace Model
 {
@@ -8,19 +12,20 @@ namespace Model
     {
         private static readonly int s_ShaderColorId = Shader.PropertyToID("_HdrTint");
 
-        [ReadOnly]
-        [ShowInInspector]
-        private int Hp;
-        [SerializeField]
-        private string m_ConnectorTag = "ConnectorRange";
-        [SerializeField]
-        private Collider2D m_Collider;
+        [ReadOnly] [ShowInInspector] private int Hp;
+        [SerializeField] private string m_ConnectorTag = "ConnectorRange";
+        [SerializeField] private Collider2D m_Collider;
+
         [SerializeField, ColorUsage(true, hdr: true)]
         private Color m_DeactivateColor;
+
         [SerializeField, ColorUsage(true, hdr: true)]
         private Color m_InConnectorRangeColor;
-        [SerializeField]
-        private Renderer[] m_Renderers;
+
+        [SerializeField, ColorUsage(true, hdr: true)]
+        private Color m_HurtColor;
+
+        [SerializeField] private Renderer[] m_Renderers;
 
         private int m_InConnectorRangeCount;
 
@@ -28,7 +33,7 @@ namespace Model
         public GameObject GameObject => gameObject;
         public IConnector Connector { get; private set; }
         public abstract int MaxHp { get; }
-        
+
         public IRoot Root { get; private set; }
 
         public virtual void Activate(IRoot root, IConnector connector)
@@ -38,10 +43,11 @@ namespace Model
             Connector = connector;
             m_InConnectorRangeCount = 0;
             m_Collider.isTrigger = false;
-            foreach(var renderer in m_Renderers)
+            foreach (var renderer in m_Renderers)
             {
                 renderer.material.SetColor(s_ShaderColorId, root.Color);
             }
+
             DeactivateComponents.Instance.RemoveComponent(this);
         }
 
@@ -50,29 +56,32 @@ namespace Model
             Hp -= damage;
             if (Hp <= 0)
                 Connector.LostConnect(this);
-            else if (Hp < MaxHp / 2)
+            else
                 Warning();
         }
 
+
         protected virtual void Warning()
         {
-                       
+            StartCoroutine(GameUtils.HurtCoroutine(m_Renderers, s_ShaderColorId, Root));
         }
 
         public virtual void Deactivate()
         {
+            StopAllCoroutines();
             Root = null;
             m_Collider.isTrigger = true;
             foreach (var renderer in m_Renderers)
             {
                 renderer.material.SetColor(s_ShaderColorId, m_DeactivateColor);
             }
+
             DeactivateComponents.Instance.AddComponent(this);
         }
 
         void OnTriggerEnter2D(Collider2D collision)
         {
-            if(null == Root && collision.CompareTag(m_ConnectorTag))
+            if (null == Root && collision.CompareTag(m_ConnectorTag))
             {
                 m_InConnectorRangeCount++;
                 foreach (var renderer in m_Renderers)
@@ -87,7 +96,7 @@ namespace Model
             if (null == Root && collision.CompareTag(m_ConnectorTag))
             {
                 m_InConnectorRangeCount--;
-                if(m_InConnectorRangeCount == 0)
+                if (m_InConnectorRangeCount == 0)
                 {
                     foreach (var renderer in m_Renderers)
                     {

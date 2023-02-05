@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class GameExtensions
 {
+    
     public static void LookAt2D(this Transform transform, Transform target)
     {
         Vector2 direction = target.position - transform.position;

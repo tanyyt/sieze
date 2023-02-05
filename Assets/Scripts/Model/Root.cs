@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Core;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Utils;
 
 namespace Model
 {
@@ -15,19 +16,23 @@ namespace Model
         [SerializeField] private CircleCollider2D m_CircleCollider;
         [SerializeField, ColorUsage(true, hdr: true)] private Color m_Color;
         [SerializeField, ColorUsage(true, hdr: true)] private Color m_LineColor;
+        [SerializeField, ColorUsage(true, hdr: true)] private Color m_HurtColor;
         [SerializeField] private LineRenderer m_LineRenderer;
         [ReadOnly] [ShowInInspector] private int m_Hp;
+        private Renderer m_Renderer;
         private readonly List<IComponent> m_Components = new();
         private readonly Dictionary<IComponent, LineRenderer> m_C2LDict = new();
         public GameObject GameObject => gameObject;
         public int MaxHp => m_MaxHp;
         public int Count => m_Components.Count;
         public float ConnectRange => m_ConnectRange;
+        public Color HurtColor => m_HurtColor;
         public Color Color => m_Color;
         public Color LineColor => m_LineColor;
 
         protected virtual void Awake()
         {
+            m_Renderer = GetComponent<SpriteRenderer>();
             m_Hp = m_MaxHp;
             if(null != m_CircleCollider)
             {
@@ -39,6 +44,7 @@ namespace Model
         protected virtual void OnDestroy()
         {
             Roots.Instance.RemoveRoot(this);
+            StopAllCoroutines();
         }
 
         public void Hurt(int damage)
@@ -49,6 +55,10 @@ namespace Model
                 DeactivateComponents();
                 Roots.Instance.RemoveRoot(this);
                 Destroy(gameObject);
+            }
+            else
+            {
+                StartCoroutine(GameUtils.HurtCoroutine(m_Renderer, s_ShaderColorId, this));
             }
         }
         
