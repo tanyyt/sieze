@@ -6,5 +6,7 @@ namespace Model
     {
         Color Color { get; }
         Color LineColor { get; }
+
+        void RecalculateSpeed();
     }
 }

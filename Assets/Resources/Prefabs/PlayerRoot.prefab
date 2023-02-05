@@ -334,3 +334,4 @@ MonoBehaviour:
   m_Color: {r: 0.39840803, g: 1.2438196, b: 2.1535568, a: 1}
   m_LineColor: {r: 0.1513092, g: 1.6055588, b: 0.27740023, a: 1}
   m_LineRenderer: {fileID: 622256164829482892, guid: 58d75bfff5da6413da7ac0dc0ee3f273, type: 3}
+  m_Movement: {fileID: 7471412133258792108}

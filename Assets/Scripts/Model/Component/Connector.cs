@@ -14,7 +14,6 @@ namespace Model
         private float m_ConnectRange;
         [SerializeField]
         private CircleCollider2D m_CircleCollider;
-        [SerializeField, ColorUsage(true, hdr: true)] private Color m_LineColor;
         [SerializeField] private LineRenderer m_LineRenderer;
 
         private readonly List<IComponent> m_Components = new();
@@ -34,6 +33,7 @@ namespace Model
         {
             base.Activate(root, connector);
             m_CircleCollider.radius = Mathf.Sqrt(m_ConnectRange);
+            m_CircleCollider.gameObject.tag = root is PlayerRoot ? "ConnectorRange" : "Untagged";
         }
 
         public override void Deactivate()
@@ -55,8 +55,9 @@ namespace Model
             ((IConnector)this).AddComponent(component);
             component.GameObject.transform.SetParent(gameObject.transform);
             line.transform.SetParent(gameObject.transform);
-            line.material.SetColor(s_ShaderColorId, m_LineColor);
+            line.material.SetColor(s_ShaderColorId, Root.LineColor);
             m_C2LDict.Add(component, line);
+            Root.RecalculateSpeed();
         }
 
         public bool LostConnect(IComponent component)
@@ -69,6 +70,7 @@ namespace Model
                 m_C2LDict.Remove(component);
                 Destroy(line);
             }
+            Root.RecalculateSpeed();
             return isSuccess;
         }
 

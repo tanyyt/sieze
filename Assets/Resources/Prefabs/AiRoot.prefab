@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Color: {r: 2.8062434, g: 0.21074556, b: 0.18856181, a: 1}
   m_LineColor: {r: 2.3214447, g: 0.83933216, b: 0.032850575, a: 1}
   m_LineRenderer: {fileID: 622256164829482892, guid: 58d75bfff5da6413da7ac0dc0ee3f273, type: 3}
+  m_Movement: {fileID: 4965301157926601945}
 --- !u!1001 &1705970877311982503
 PrefabInstance:
   m_ObjectHideFlags: 0
