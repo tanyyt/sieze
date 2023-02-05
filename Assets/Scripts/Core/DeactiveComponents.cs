@@ -18,7 +18,7 @@ namespace Core
 
         public readonly List<IComponent> m_DeactivateComponents = new List<IComponent>();
 
-        public void ClearComponents()
+        public void ClearComponents(bool isWin)
         {
             m_DeactivateComponents.Clear();  
             Debug.Log("ClearComponents");

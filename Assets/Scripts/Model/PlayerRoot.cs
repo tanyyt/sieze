@@ -26,7 +26,7 @@ namespace Model
             Roots.Instance.playerRoot = null;
             if(!GamePlay.isGameOver)
             {
-                GameEvent.gameOverEvent?.Invoke();
+                GameEvent.gameOverEvent?.Invoke(false);
             }
         }
     }

@@ -32,7 +32,7 @@ namespace Core
             m_EnemyRootGenerator = new EnemyRootsGenerator(map);
         }
 
-        void GameOver()
+        void GameOver(bool isWin)
         {
             Debug.Log("Game Over");
             isGameOver = true;   

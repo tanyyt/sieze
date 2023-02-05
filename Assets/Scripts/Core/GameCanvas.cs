@@ -12,6 +12,9 @@ namespace Core
         public GameObject RestartUI;
         public Button BtnRestart;
         public Text HpText;
+        public Text GameOvaTitle;
+        public Color WinColor;
+        public Color FailedColor;
 
         void Awake()
         {
@@ -38,16 +41,12 @@ namespace Core
             }
         }
 
-        void ShowEndingUI()
+        void ShowEndingUI(bool isWin)
         {
-            Debug.Log("Show UI");
-            RestartUI.SetActive(true);
-        }
-
-        [Button]
-        public static void GameOver()
-        {
-            GameEvent.gameOverEvent?.Invoke();
+            if(RestartUI != null)
+                RestartUI.SetActive(true);
+            GameOvaTitle.text = isWin ? "WIN" : "GAMEOVER";
+            GameOvaTitle.color = isWin ? WinColor : FailedColor;
         }
     }
 }

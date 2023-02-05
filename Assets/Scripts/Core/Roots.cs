@@ -18,7 +18,7 @@ namespace Core
             GameEvent.gameOverEvent += ClearRoots;
         }
 
-        private void ClearRoots()
+        private void ClearRoots(bool isWin)
         {
             m_Roots.Clear();
             Debug.Log("ClearRoots");
